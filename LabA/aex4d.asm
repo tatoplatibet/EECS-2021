@@ -1,11 +1,8 @@
-lui x6, 0x12345
-slli x6, x6, 32
-lui x7, 0x878
-slli x7, x7, 20
-lui x8, 0x11223
-addi x9, x0, 0x344
-add x5, x6, x7
-add x5, x5, x8
-add x5, x5, x9
-
+c:	EQU	0x1234587811223344
+	lui	x6,	(c & 0xffffffff) >> 12
+	addi	x6,	x6,	c & 0xfff
+	lui	x7,	(c >> 44) + 1
+	addi	x7,	x7,	(c & 0xfff00000000) >> 32
+	slli	x7,	x7,	32
+	add	x5,	x6,	x7
 
